@@ -5,24 +5,7 @@ const addNew = async (data) => {
 
   console.log('dados recebidos: ', data)
 
-  const {
-    name,
-    description,
-    required_days,
-    has_reminder,
-    reminder_hour,
-    reminder_note,
-    status,
-  } = data
-  const newHabits = new Habits({
-    name,
-    description,
-    required_days,
-    has_reminder,
-    reminder_hour,
-    reminder_note,
-    status,
-  })
+  const newHabits = new Habits({ ...data })
 
   return newHabits
     .save()

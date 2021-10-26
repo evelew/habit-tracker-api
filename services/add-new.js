@@ -4,8 +4,8 @@ const addNew = require('./../repository/add-new')
 
 module.exports = async (body) => {
   const schema = Joi.object({
-    name: Joi.string().alphanum().max(30).required(),
-    description: Joi.string().alphanum().max(80),
+    name: Joi.string().max(30).required(),
+    description: Joi.string().max(80),
     required_days: Joi.object({
       sunday: Joi.boolean(),
       monday: Joi.boolean(),
@@ -21,17 +21,23 @@ module.exports = async (body) => {
     status: Joi.string().valid('working', 'done', 'waiting').required(),
   })
 
-  const data = {
-    name: body.name,
-    description: body.description,
-    required_days: body.required_days,
-    has_reminder: body.has_reminder,
-    reminder_hour: body.reminder_hour,
-    reminder_note: body.reminder_note,
-    status: body.status,
+  const { error, value } = schema.validate(body, {
+    abortEarly: false,
+  })
+
+  if (error) {
+    const response = {
+      name: 'ERR: erro ao validar dados',
+      errors: error.details.map((x) => ({
+        message: x.message,
+        field: x.context.key,
+      })),
+    }
+
+    return response
+  } else {
+    const message = await addNew(value)
+
+    return message
   }
-
-  const message = await addNew(data)
-
-  return message
 }
