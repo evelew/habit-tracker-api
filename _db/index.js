@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-mongoose.connect('mongodb://mongo:27017/habit_tracker')
+mongoose.connect('mongodb://localhost:27017/habit_tracker')
 
 const habitsSchema = new mongoose.Schema(
   {

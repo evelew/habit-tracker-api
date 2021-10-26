@@ -1,6 +1,6 @@
 const addNew = require('./../repository/add-new')
 
-module.exports = (body) => {
+module.exports = async (body) => {
   const data = {
     name: body.name,
     description: body.description,
