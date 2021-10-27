@@ -1,6 +1,7 @@
 const addNew = require('./../services/add-new')
 const getAll = require('./../services/get-all')
 const getHabit = require('./../services/get-habit')
+const updateHabit = require('./../services/update-habit')
 
 module.exports = (express) => {
   let api = express.Router()
@@ -18,6 +19,12 @@ module.exports = (express) => {
   api.get('/habits/get/:id', async function (req, res) {
     const id = req.params.id
     const habit = await getHabit(id)
+    res.send(habit)
+  })
+
+  api.put('/habits/update/:id', async function (req, res) {
+    const _id = req.params.id
+    const habit = await updateHabit({ _id, body: req.body })
     res.send(habit)
   })
 
