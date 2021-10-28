@@ -2,7 +2,6 @@ const db = require('./../_db')
 
 const addNew = async (data) => {
   const Habits = db.Mongoose.model('habits', db.HabitSchema)
-
   const newHabits = new Habits({ ...data })
 
   return newHabits
