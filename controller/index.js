@@ -3,6 +3,7 @@ const getAll = require('./../services/get-all')
 const getHabit = require('./../services/get-habit')
 const updateHabit = require('./../services/update-habit')
 const deleteHabit = require('./../services/delete-habit')
+const doneHabit = require('./../services/done-habit')
 
 module.exports = (express) => {
   let api = express.Router()
@@ -31,6 +32,11 @@ module.exports = (express) => {
 
   api.delete('/habits/delete/:id', async function (req, res) {
     const habit = await deleteHabit(req.params.id)
+    res.send(habit)
+  })
+
+  api.post('/habits/done-today/:id', async function (req, res) {
+    const habit = await doneHabit(req.params.id)
     res.send(habit)
   })
 

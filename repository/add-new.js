@@ -9,7 +9,10 @@ const addNew = async (data) => {
     .then((habits) => {
       return `Novo hábito "${habits.name}" criado com sucesso!`
     })
-    .catch((err) => err)
+    .catch((err) => {
+      console.log('ERR: ', err)
+      return 'ERRO: Alguma coisa deu errado!'
+    })
 }
 
 module.exports = addNew

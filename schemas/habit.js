@@ -3,6 +3,7 @@ const Joi = require('joi')
 const schema = Joi.object({
   name: Joi.string().max(30).required(),
   description: Joi.string().max(80),
+  history: Joi.array(),
   required_days: Joi.object({
     sunday: Joi.boolean(),
     monday: Joi.boolean(),
