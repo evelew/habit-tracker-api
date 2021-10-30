@@ -1,12 +1,9 @@
 const doneHabit = require('./../repository/done-habit')
+const getFormattedDate = require('./../helpers/getFormattedDate')
 
 module.exports = async (_id) => {
-  const today = new Date()
-  const day = today.getDate()
-  const month = Number(today.getMonth()) + 1
-  const year = today.getFullYear()
-  const todayFormatted = `${year}-${month}-${day}`
+  const date = getFormattedDate(new Date())
+  const response = await doneHabit({ _id, date })
 
-  const response = await doneHabit({ _id, date: todayFormatted })
   return response
 }
