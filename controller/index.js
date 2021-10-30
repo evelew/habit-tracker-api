@@ -3,7 +3,7 @@ const getAll = require('./../services/get-all')
 const getHabit = require('./../services/get-habit')
 const updateHabit = require('./../services/update-habit')
 const deleteHabit = require('./../services/delete-habit')
-const doneHabit = require('./../services/done-habit')
+const doneTodayHabit = require('./../services/done-today-habit')
 const undoneHabit = require('./../services/undone-habit')
 
 module.exports = (express) => {
@@ -39,7 +39,7 @@ module.exports = (express) => {
 
   api.put('/habits/done-today/:id', async function (req, res) {
     const _id = req.params.id
-    const habit = await doneHabit(_id)
+    const habit = await doneTodayHabit(_id)
     res.send(habit)
   })
 

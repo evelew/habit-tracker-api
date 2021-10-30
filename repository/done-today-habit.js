@@ -1,12 +1,12 @@
-const db = require('./../_db')
+const db = require('../_db')
 
-const doneHabit = async ({ _id, date }) => {
+const doneTodayHabit = async ({ _id, date }) => {
   const Habit = db.Mongoose.model('habits', db.HabitSchema)
 
   return Habit.updateOne(
     { _id },
     {
-      $push: { history: date },
+      $addToSet: { history: date },
     }
   )
     .then(() => {
@@ -18,4 +18,4 @@ const doneHabit = async ({ _id, date }) => {
     })
 }
 
-module.exports = doneHabit
+module.exports = doneTodayHabit
